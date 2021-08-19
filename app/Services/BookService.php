@@ -5,16 +5,31 @@ use App\Models\Book;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BookService {
+
+    /**
+     * Create a new BookService instance.
+     *
+     * @return void
+     */
+    public function __construct() {}
+
+    /**
+     * Get list of books and paginate
+     *
+     * @return App\Models\Book
+     */
     public function findAll()
     {
         $books = Book::simplePaginate(10);
-
-        if ($this->isPageAvaiable($books)) {
-            throw new NotFoundHttpException("Book page not found");
-        }
         return $books;
     }
 
+    /**
+     * Find a book by id
+     *
+     * @param string id
+     * @return App\Models\Book
+     */
     public function findOne(string $id)
     {
         $book = Book::find($id);
@@ -24,13 +39,26 @@ class BookService {
         return $book;
     }
 
+    /**
+     * Create a new book
+     *
+     * @param Array Book Data Transfer Object
+     * @return App\Models\Book
+     */
     public function create($bookDto)
     {
         $book = Book::create($bookDto);
         return $book;
     }
 
-    public function update($bookDto, $id)
+    /**
+     * Update a book by id
+     *
+     * @param Array Book Data Transfer Object
+     * @param string id
+     * @return App\Models\Book
+     */
+    public function update($bookDto, string $id)
     {
         $book = Book::find($id);
         if(!$book) {
@@ -41,17 +69,18 @@ class BookService {
         return $book;
     }
 
-    public function remove($id)
+    /**
+     * Remove a book by id
+     *
+     * @param string id
+     * @return App\Models\Book
+     */
+    public function remove(string $id)
     {
         $book = Book::find($id);
         if(!$book) {
             throw new NotFoundHttpException("Book #$id not found");
         }
         return $book->delete();
-    }
-
-    private function isPageAvaiable($books)
-    {
-        return empty($books->all());
     }
 }
