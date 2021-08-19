@@ -23,6 +23,6 @@ trait ApiResponser
 
     protected function withoutBodyResponse($code)
 	{
-		return response()->json(null, $code);
+		return response()->make(null, $code);
 	}
 }

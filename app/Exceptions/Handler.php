@@ -12,6 +12,7 @@ use App\Traits\ApiResponser;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use MongoDB\Driver\Exception\Exception as MongoDBException;
 
 class Handler extends ExceptionHandler
 {
@@ -56,7 +57,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof NotFoundHttpException) {
             return $this->errorResponse(
-                $exception->getMessage(),
+                $exception->getMessage() ?: 'Not found',
                 Response::HTTP_NOT_FOUND
             );
         }
@@ -75,10 +76,18 @@ class Handler extends ExceptionHandler
             );
         }
 
+
         if ($exception instanceof HttpException) {
             return $this->errorResponse(
                 $exception->getMessage(),
                 $exception->getStatusCode()
+            );
+        }
+
+        if ($exception instanceof MongoDBException) {
+            return $this->errorResponse(
+                $exception->getMessage(),
+                Response::HTTP_BAD_REQUEST
             );
         }
 
