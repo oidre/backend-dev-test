@@ -23,6 +23,12 @@ $router->group([
     $router->post('/books', 'BookController@create');
     $router->patch('/books/{id}', 'BookController@update');
     $router->delete('/books/{id}', 'BookController@remove');
+
+    $router->get('/firebase-books', 'FirebaseBookController@findAll');
+    $router->get('/firebase-books/{id}', 'FirebaseBookController@findOne');
+    $router->post('/firebase-books', 'FirebaseBookController@create');
+    $router->patch('/firebase-books/{id}', 'FirebaseBookController@update');
+    $router->delete('/firebase-books/{id}', 'FirebaseBookController@remove');
 });
 
 
@@ -34,3 +40,5 @@ $router->group([
     $router->post('logout', 'AuthController@logout');
     $router->post('me', 'AuthController@me');
 });
+
+$router->get('/soal-7', 'SoalController@no7');
