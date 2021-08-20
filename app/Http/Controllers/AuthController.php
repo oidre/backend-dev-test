@@ -10,12 +10,24 @@ class AuthController extends ApiController
 {
     private $authService;
 
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
     public function __construct(AuthService $authService)
     {
         $this->middleware('auth', ['except' => ['register', 'login']]);
         $this->authService = $authService;
     }
 
+    /**
+     * Do login authentication
+     * POST /auth/login
+     *
+     * @param \Illuminate\Http\Request User Data Transfer Object
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $rules = [
@@ -28,6 +40,13 @@ class AuthController extends ApiController
         return $this->respondWithToken($token);
     }
 
+    /**
+     * Register new user
+     * POST /auth/register
+     *
+     * @param \Illuminate\Http\Request User Data Transfer Object
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request)
     {
         $rules = [
@@ -44,11 +63,23 @@ class AuthController extends ApiController
         );
     }
 
+    /**
+     * Check login for current authenticated user
+     * POST /auth/me
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function me()
     {
         return $this->authService->me();
     }
 
+    /**
+     * Do logout by revoking auth token
+     * POST /auth/logout
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout()
     {
         $this->authService->logout();
@@ -56,7 +87,7 @@ class AuthController extends ApiController
     }
 
     /**
-     * Get the token array structure.
+     * Respond with token included
      *
      * @param string $token
      * @return \Illuminate\Http\JsonResponse
