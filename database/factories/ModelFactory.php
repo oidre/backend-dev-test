@@ -2,7 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Models\User;
+use App\Models\Book;
 use Faker\Generator as Faker;
 
 /*
@@ -18,7 +19,16 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
         'email' => $faker->email,
+        'password' => $faker->password
+    ];
+});
+
+$factory->define(Book::class, function (Faker $faker) {
+    return [
+        'title' => $faker->text(50),
+        'description' => $faker->text(),
+        'author' => $faker->name,
+        'published_year' => $faker->year()
     ];
 });
