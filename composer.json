@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.2.5",
         "google/cloud-firestore": "^1.19",
+        "illuminate/mail": "^7.30",
         "jenssegers/mongodb": "^3.7.3",
         "kreait/laravel-firebase": "^3.0.0",
         "laravel/lumen-framework": "^7.0",
