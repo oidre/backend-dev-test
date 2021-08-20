@@ -97,6 +97,8 @@ $app->routeMiddleware([
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Kreait\Laravel\Firebase\ServiceProvider::class);
+$app->register('Sentry\Laravel\ServiceProvider');
+$app->register('Sentry\Laravel\Tracing\ServiceProvider');
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*

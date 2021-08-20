@@ -42,3 +42,6 @@ $router->group([
 });
 
 $router->get('/soal-7', 'SoalController@no7');
+$router->get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
