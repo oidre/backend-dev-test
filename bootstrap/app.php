@@ -28,6 +28,7 @@ $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->withFacades();
 
 $app->withEloquent();
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +102,7 @@ $app->register('Sentry\Laravel\ServiceProvider');
 $app->register('Sentry\Laravel\Tracing\ServiceProvider');
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 
 // Mailer config
 $app->configure('mail');
