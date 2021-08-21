@@ -71,7 +71,8 @@ class AuthController extends ApiController
      */
     public function me()
     {
-        return $this->authService->me();
+        $user = $this->authService->me();
+        return $this->successResponse($user, 'User is logged in');
     }
 
     /**
